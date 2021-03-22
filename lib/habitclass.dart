@@ -1,7 +1,9 @@
 class Habit {
   var name;
   var strength;
-  var week = [];
+  List<int> week = [];
+  var type;
+  var goal;
 }
 
 class HabitList {
