@@ -24,7 +24,17 @@ class HabitsPage extends StatefulWidget {
 
 class _HabitsPageState extends State<HabitsPage> {
   List<Habit> habitlist = [];
-  int temp = 0;
+  //HabitDBHelper habitDBHelper = HabitDBHelper();
+
+  void asyncMethod() async {
+    //await habitDBHelper.open();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    asyncMethod();
+  }
 
   int habitGoal;
   String habitName;
@@ -168,6 +178,7 @@ class _HabitsPageState extends State<HabitsPage> {
                             reverse == "Less than" ? "reverse" : "counter";
                       }
                       newHabit.goal = habitGoal;
+                      //habitDBHelper.addHabit(newHabit);
                       habitlist.add(newHabit);
                       print("Adding habit - " + newHabit.type);
 
