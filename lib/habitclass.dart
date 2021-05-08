@@ -32,24 +32,33 @@ class Habit {
   }
 }
 
-class HabitDBHelper {
-  Database db;
+class HabitsDB {
+  static final HabitsDB instance = HabitsDB._init();
+  static Database db;
+
   var newFormat = DateFormat("yyyy-MM-dd");
 
-  Future open() async {
-    var databasesPath = await getDatabasesPath();
-    String path = join(databasesPath, 'HabitTrackerDB.db');
-    db = await openDatabase(path, version: 1,
-        onCreate: (Database db, int version) async {
-      await db.execute('''
-      create table IF NOT EXISTS $tableHabits ( $columnDate INT primary key )
-      ''');
-      await db.execute('''
-      create table IF NOT EXISTS $tableDetails ( $columnName TEXT primary key, $columnType TEXT, $columnGoal INT );
-      ''');
-    });
-    print("After open - $path");
+  Future<Database> get database async {
+    if (db != null) return db!;
+
+    db = await _initDB('HabitTrackerDB.db');
+    return db!;
   }
+
+  // Future open() async {
+  //   final databasesPath = await getDatabasesPath();
+  //   final path = join(databasesPath, 'HabitTrackerDB.db');
+  //   db = await openDatabase(path, version: 1,
+  //       onCreate: (Database db, int version) async {
+  //     await db.execute('''
+  //     create table IF NOT EXISTS $tableHabits ( $columnDate INT primary key )
+  //     ''');
+  //     await db.execute('''
+  //     create table IF NOT EXISTS $tableDetails ( $columnName TEXT primary key, $columnType TEXT, $columnGoal INT );
+  //     ''');
+  //   });
+  //   print("After open - $path");
+  // }
 
   Future insertHabit(String day, List<Habit> habitlist) async {
     String dateString = newFormat.format(DateTime.now());
