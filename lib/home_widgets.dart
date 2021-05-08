@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 
 class DayBox extends StatelessWidget {
   const DayBox({
-    Key key,
-    @required this.date,
-    this.spacer,
+    Key? key,
+    required this.date,
+    required this.spacer,
   }) : super(key: key);
 
   final DateTime date;
@@ -17,7 +17,7 @@ class DayBox extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-            width: spacer != null
+            width: spacer != 0
                 ? MediaQuery.of(context).size.width * spacer
                 : MediaQuery.of(context).size.width * 0.015),
         Container(
@@ -60,9 +60,9 @@ class DayBox extends StatelessWidget {
 
 class BooleanElement extends StatefulWidget {
   const BooleanElement({
-    Key key,
-    @required this.habit,
-    @required this.daynum,
+    Key? key,
+    required this.habit,
+    required this.daynum,
   }) : super(key: key);
 
   final Habit habit;
@@ -109,9 +109,9 @@ class _BooleanElementState extends State<BooleanElement> {
 
 class CounterElement extends StatefulWidget {
   const CounterElement({
-    Key key,
-    @required this.habit,
-    @required this.daynum,
+    Key? key,
+    required this.habit,
+    required this.daynum,
   }) : super(key: key);
 
   final Habit habit;
@@ -164,9 +164,9 @@ class _CounterElementState extends State<CounterElement> {
 
 class ReverseElement extends StatefulWidget {
   const ReverseElement({
-    Key key,
-    @required this.habit,
-    @required this.daynum,
+    Key? key,
+    required this.habit,
+    required this.daynum,
   }) : super(key: key);
 
   final Habit habit;

@@ -23,7 +23,7 @@ class HabitsPage extends StatefulWidget {
 }
 
 class _HabitsPageState extends State<HabitsPage> {
-  late List<Habit> habitlist;
+  List<Habit> habitlist = [];
   //HabitsDB habitsDB = HabitsDB();
 
   Future refreshHabits() async {
@@ -37,8 +37,8 @@ class _HabitsPageState extends State<HabitsPage> {
     refreshHabits();
   }
 
-  int habitGoal;
-  String habitName;
+  int habitGoal = 0;
+  String habitName = "";
   bool habitType = false;
   String reverse = "More than";
 
@@ -70,7 +70,7 @@ class _HabitsPageState extends State<HabitsPage> {
                         title: TextFormField(
                           controller: _habitNameController,
                           validator: (value) {
-                            return value.isNotEmpty
+                            return value!.isNotEmpty
                                 ? null
                                 : "Should not be empty!";
                           },
@@ -92,7 +92,7 @@ class _HabitsPageState extends State<HabitsPage> {
                                 value: habitType,
                                 onChanged: (checked) {
                                   setState(() {
-                                    habitType = checked;
+                                    habitType = checked!;
                                   });
                                 })
                           ],
@@ -117,9 +117,9 @@ class _HabitsPageState extends State<HabitsPage> {
                                         ),
                                       );
                                     }).toList(),
-                                    onChanged: (String reverseValue) {
+                                    onChanged: (reverseValue) {
                                       setState(() {
-                                        reverse = reverseValue;
+                                        reverse = reverseValue!;
                                       });
                                     },
                                   ),
@@ -133,7 +133,7 @@ class _HabitsPageState extends State<HabitsPage> {
                               title: TextFormField(
                                 controller: _habitGoalController,
                                 validator: (goalvalue) {
-                                  if (goalvalue.isEmpty) {
+                                  if (goalvalue!.isEmpty) {
                                     goalvalue = "0";
                                   }
                                   return _isNumeric(goalvalue)
@@ -158,7 +158,7 @@ class _HabitsPageState extends State<HabitsPage> {
               ),
               title: Text('New Habit'),
               actions: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
@@ -167,7 +167,7 @@ class _HabitsPageState extends State<HabitsPage> {
                     ),
                   ),
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       // Create new habit
                       Habit newHabit = new Habit();
                       newHabit.name = habitName;
@@ -275,15 +275,19 @@ class _HabitsPageState extends State<HabitsPage> {
                     ),
                     DayBox(
                       date: DateTime.now().subtract(Duration(days: 1)),
+                      spacer: 0,
                     ),
                     DayBox(
                       date: DateTime.now().subtract(Duration(days: 2)),
+                      spacer: 0,
                     ),
                     DayBox(
                       date: DateTime.now().subtract(Duration(days: 3)),
+                      spacer: 0,
                     ),
                     DayBox(
                       date: DateTime.now().subtract(Duration(days: 4)),
+                      spacer: 0,
                     ),
                   ],
                 ),
